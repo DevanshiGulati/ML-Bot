@@ -1,0 +1,367 @@
+{
+  "num_rows": 1460,
+  "num_features": 80,
+  "num_numeric_features": 37,
+  "num_categorical_features": 43,
+  "numeric_columns": [
+    "Id",
+    "MSSubClass",
+    "LotFrontage",
+    "LotArea",
+    "OverallQual",
+    "OverallCond",
+    "YearBuilt",
+    "YearRemodAdd",
+    "MasVnrArea",
+    "BsmtFinSF1",
+    "BsmtFinSF2",
+    "BsmtUnfSF",
+    "TotalBsmtSF",
+    "1stFlrSF",
+    "2ndFlrSF",
+    "LowQualFinSF",
+    "GrLivArea",
+    "BsmtFullBath",
+    "BsmtHalfBath",
+    "FullBath",
+    "HalfBath",
+    "BedroomAbvGr",
+    "KitchenAbvGr",
+    "TotRmsAbvGrd",
+    "Fireplaces",
+    "GarageYrBlt",
+    "GarageCars",
+    "GarageArea",
+    "WoodDeckSF",
+    "OpenPorchSF",
+    "EnclosedPorch",
+    "3SsnPorch",
+    "ScreenPorch",
+    "PoolArea",
+    "MiscVal",
+    "MoSold",
+    "YrSold"
+  ],
+  "categorical_columns": [
+    "MSZoning",
+    "Street",
+    "Alley",
+    "LotShape",
+    "LandContour",
+    "Utilities",
+    "LotConfig",
+    "LandSlope",
+    "Neighborhood",
+    "Condition1",
+    "Condition2",
+    "BldgType",
+    "HouseStyle",
+    "RoofStyle",
+    "RoofMatl",
+    "Exterior1st",
+    "Exterior2nd",
+    "MasVnrType",
+    "ExterQual",
+    "ExterCond",
+    "Foundation",
+    "BsmtQual",
+    "BsmtCond",
+    "BsmtExposure",
+    "BsmtFinType1",
+    "BsmtFinType2",
+    "Heating",
+    "HeatingQC",
+    "CentralAir",
+    "Electrical",
+    "KitchenQual",
+    "Functional",
+    "FireplaceQu",
+    "GarageType",
+    "GarageFinish",
+    "GarageQual",
+    "GarageCond",
+    "PavedDrive",
+    "PoolQC",
+    "Fence",
+    "MiscFeature",
+    "SaleType",
+    "SaleCondition"
+  ],
+  "target_column": "SalePrice",
+  "target_dtype": "int64",
+  "target_unique_values": 663,
+  "target_distribution": {
+    "140000": 0.0137,
+    "135000": 0.0116,
+    "145000": 0.0096,
+    "155000": 0.0096,
+    "110000": 0.0089
+  },
+  "class_imbalance": false,
+  "missing_value_columns": {
+    "LotFrontage": 259,
+    "Alley": 1369,
+    "MasVnrType": 872,
+    "MasVnrArea": 8,
+    "BsmtQual": 37,
+    "BsmtCond": 37,
+    "BsmtExposure": 38,
+    "BsmtFinType1": 37,
+    "BsmtFinType2": 38,
+    "Electrical": 1,
+    "FireplaceQu": 690,
+    "GarageType": 81,
+    "GarageYrBlt": 81,
+    "GarageFinish": 81,
+    "GarageQual": 81,
+    "GarageCond": 81,
+    "PoolQC": 1453,
+    "Fence": 1179,
+    "MiscFeature": 1406
+  },
+  "has_missing_values": true,
+  "high_correlation_pairs": [],
+  "numeric_feature_stats": {
+    "Id": {
+      "mean": 730.5,
+      "std": 421.61,
+      "min": 1.0,
+      "max": 1460.0
+    },
+    "MSSubClass": {
+      "mean": 56.8973,
+      "std": 42.3006,
+      "min": 20.0,
+      "max": 190.0
+    },
+    "LotFrontage": {
+      "mean": 70.05,
+      "std": 24.2848,
+      "min": 21.0,
+      "max": 313.0
+    },
+    "LotArea": {
+      "mean": 10516.8281,
+      "std": 9981.2649,
+      "min": 1300.0,
+      "max": 215245.0
+    },
+    "OverallQual": {
+      "mean": 6.0993,
+      "std": 1.383,
+      "min": 1.0,
+      "max": 10.0
+    },
+    "OverallCond": {
+      "mean": 5.5753,
+      "std": 1.1128,
+      "min": 1.0,
+      "max": 9.0
+    },
+    "YearBuilt": {
+      "mean": 1971.2678,
+      "std": 30.2029,
+      "min": 1872.0,
+      "max": 2010.0
+    },
+    "YearRemodAdd": {
+      "mean": 1984.8658,
+      "std": 20.6454,
+      "min": 1950.0,
+      "max": 2010.0
+    },
+    "MasVnrArea": {
+      "mean": 103.6853,
+      "std": 181.0662,
+      "min": 0.0,
+      "max": 1600.0
+    },
+    "BsmtFinSF1": {
+      "mean": 443.6397,
+      "std": 456.0981,
+      "min": 0.0,
+      "max": 5644.0
+    },
+    "BsmtFinSF2": {
+      "mean": 46.5493,
+      "std": 161.3193,
+      "min": 0.0,
+      "max": 1474.0
+    },
+    "BsmtUnfSF": {
+      "mean": 567.2404,
+      "std": 441.867,
+      "min": 0.0,
+      "max": 2336.0
+    },
+    "TotalBsmtSF": {
+      "mean": 1057.4295,
+      "std": 438.7053,
+      "min": 0.0,
+      "max": 6110.0
+    },
+    "1stFlrSF": {
+      "mean": 1162.6267,
+      "std": 386.5877,
+      "min": 334.0,
+      "max": 4692.0
+    },
+    "2ndFlrSF": {
+      "mean": 346.9925,
+      "std": 436.5284,
+      "min": 0.0,
+      "max": 2065.0
+    },
+    "LowQualFinSF": {
+      "mean": 5.8445,
+      "std": 48.6231,
+      "min": 0.0,
+      "max": 572.0
+    },
+    "GrLivArea": {
+      "mean": 1515.4637,
+      "std": 525.4804,
+      "min": 334.0,
+      "max": 5642.0
+    },
+    "BsmtFullBath": {
+      "mean": 0.4253,
+      "std": 0.5189,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "BsmtHalfBath": {
+      "mean": 0.0575,
+      "std": 0.2388,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "FullBath": {
+      "mean": 1.5651,
+      "std": 0.5509,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "HalfBath": {
+      "mean": 0.3829,
+      "std": 0.5029,
+      "min": 0.0,
+      "max": 2.0
+    },
+    "BedroomAbvGr": {
+      "mean": 2.8664,
+      "std": 0.8158,
+      "min": 0.0,
+      "max": 8.0
+    },
+    "KitchenAbvGr": {
+      "mean": 1.0466,
+      "std": 0.2203,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "TotRmsAbvGrd": {
+      "mean": 6.5178,
+      "std": 1.6254,
+      "min": 2.0,
+      "max": 14.0
+    },
+    "Fireplaces": {
+      "mean": 0.613,
+      "std": 0.6447,
+      "min": 0.0,
+      "max": 3.0
+    },
+    "GarageYrBlt": {
+      "mean": 1978.5062,
+      "std": 24.6897,
+      "min": 1900.0,
+      "max": 2010.0
+    },
+    "GarageCars": {
+      "mean": 1.7671,
+      "std": 0.7473,
+      "min": 0.0,
+      "max": 4.0
+    },
+    "GarageArea": {
+      "mean": 472.9801,
+      "std": 213.8048,
+      "min": 0.0,
+      "max": 1418.0
+    },
+    "WoodDeckSF": {
+      "mean": 94.2445,
+      "std": 125.3388,
+      "min": 0.0,
+      "max": 857.0
+    },
+    "OpenPorchSF": {
+      "mean": 46.6603,
+      "std": 66.256,
+      "min": 0.0,
+      "max": 547.0
+    },
+    "EnclosedPorch": {
+      "mean": 21.9541,
+      "std": 61.1191,
+      "min": 0.0,
+      "max": 552.0
+    },
+    "3SsnPorch": {
+      "mean": 3.4096,
+      "std": 29.3173,
+      "min": 0.0,
+      "max": 508.0
+    },
+    "ScreenPorch": {
+      "mean": 15.061,
+      "std": 55.7574,
+      "min": 0.0,
+      "max": 480.0
+    },
+    "PoolArea": {
+      "mean": 2.7589,
+      "std": 40.1773,
+      "min": 0.0,
+      "max": 738.0
+    },
+    "MiscVal": {
+      "mean": 43.489,
+      "std": 496.123,
+      "min": 0.0,
+      "max": 15500.0
+    },
+    "MoSold": {
+      "mean": 6.3219,
+      "std": 2.7036,
+      "min": 1.0,
+      "max": 12.0
+    },
+    "YrSold": {
+      "mean": 2007.8158,
+      "std": 1.3281,
+      "min": 2006.0,
+      "max": 2010.0
+    }
+  },
+  "problem_type": "regression",
+  "metric": "r2",
+  "models_tried": [
+    "LinearRegression",
+    "RandomForest",
+    "XGB"
+  ],
+  "leaderboard": {
+    "LinearRegression": 0.77892,
+    "RandomForest": 0.84818,
+    "XGB": 0.85555
+  },
+  "final_model": "XGB",
+  "reflection": {
+    "final_model": "XGB",
+    "retune": false,
+    "reasoning": "Selected based on highest leaderboard score."
+  },
+  "warnings": []
+}
