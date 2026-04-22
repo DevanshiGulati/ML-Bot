@@ -27,3 +27,7 @@ __pycache__/
 *.joblib
 *.h5
 .DS_Store
+
+.env
+artifacts/
+*.pkl
