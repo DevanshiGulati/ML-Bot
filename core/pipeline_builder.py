@@ -1,83 +1,64 @@
 """
 Pipeline Builder
 ----------------
-Constructs a full sklearn Pipeline:
-  ColumnTransformer (preprocessing) + model
+Builds a leak-proof sklearn Pipeline:
+  ColumnTransformer (preprocessor) + model
 
-The preprocessor handles:
-  - Numeric  : SimpleImputer(median) → StandardScaler
-  - Categorical: SimpleImputer(most_frequent) → OneHotEncoder(handle_unknown="ignore")
+Preprocessing is always applied inside the pipeline — so it
+automatically runs correctly during both training and inference.
 """
 
-import pandas as pd
 import numpy as np
-from sklearn.pipeline       import Pipeline
-from sklearn.compose        import ColumnTransformer
-from sklearn.impute         import SimpleImputer
-from sklearn.preprocessing  import StandardScaler, OneHotEncoder
+import pandas as pd
+from sklearn.pipeline      import Pipeline
+from sklearn.compose       import ColumnTransformer
+from sklearn.impute        import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 
-def _make_preprocessor(
-    numeric_cols:     list[str],
-    categorical_cols: list[str],
-) -> ColumnTransformer:
-    """Build the ColumnTransformer preprocessing step."""
-
+def _make_preprocessor(numeric_cols: list, categorical_cols: list) -> ColumnTransformer:
     transformers = []
 
     if numeric_cols:
-        numeric_transformer = Pipeline([
-            ("imputer", SimpleImputer(strategy="median")),
-            ("scaler",  StandardScaler()),
-        ])
-        transformers.append(("numeric", numeric_transformer, numeric_cols))
+        transformers.append((
+            "numeric",
+            Pipeline([
+                ("imputer", SimpleImputer(strategy="median")),
+                ("scaler",  StandardScaler()),
+            ]),
+            numeric_cols,
+        ))
 
     if categorical_cols:
-        categorical_transformer = Pipeline([
-            ("imputer", SimpleImputer(strategy="most_frequent")),
-            ("encoder", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
-        ])
-        transformers.append(("categorical", categorical_transformer, categorical_cols))
+        transformers.append((
+            "categorical",
+            Pipeline([
+                ("imputer", SimpleImputer(strategy="most_frequent")),
+                ("encoder", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
+            ]),
+            categorical_cols,
+        ))
 
-    preprocessor = ColumnTransformer(
-        transformers=transformers,
-        remainder="drop",           # drop any unlisted columns safely
-    )
-    return preprocessor
+    return ColumnTransformer(transformers=transformers, remainder="drop")
 
 
-def build_pipeline(
-    model,
-    numeric_cols:     list[str],
-    categorical_cols: list[str],
-) -> Pipeline:
+def build_pipeline(model, numeric_cols: list, categorical_cols: list) -> Pipeline:
     """
-    Returns a full sklearn Pipeline:
-      preprocessor → model
+    Returns a full sklearn Pipeline: preprocessor → model.
 
-    This pipeline can be:
-      - Fitted with .fit(X, y)
-      - Used for inference with .predict(X_new)
-      Both X inputs must be raw DataFrames (NOT pre-processed).
+    Both training (fit) and inference (predict) use raw DataFrames —
+    preprocessing happens automatically inside the pipeline.
     """
-    preprocessor = _make_preprocessor(numeric_cols, categorical_cols)
-
-    pipeline = Pipeline([
-        ("preprocessor", preprocessor),
+    return Pipeline([
+        ("preprocessor", _make_preprocessor(numeric_cols, categorical_cols)),
         ("model",        model),
     ])
-    return pipeline
 
 
-def infer_column_types(
-    df: pd.DataFrame,
-    target_col: str,
-) -> tuple[list[str], list[str]]:
-    """
-    Automatically split feature columns into numeric and categorical lists,
-    excluding the target column.
-    """
-    features         = df.drop(columns=[target_col])
-    numeric_cols     = features.select_dtypes(include=[np.number]).columns.tolist()
-    categorical_cols = features.select_dtypes(exclude=[np.number]).columns.tolist()
-    return numeric_cols, categorical_cols
+def infer_column_types(df: pd.DataFrame, target_col: str) -> tuple[list, list]:
+    """Split feature columns into numeric and categorical lists."""
+    feats = df.drop(columns=[target_col])
+    return (
+        feats.select_dtypes(include=[np.number]).columns.tolist(),
+        feats.select_dtypes(exclude=[np.number]).columns.tolist(),
+    )

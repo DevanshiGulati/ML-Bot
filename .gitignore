@@ -3,7 +3,7 @@ venv/
 env/
 .venv/
 ENV/
-
+.env
 # Python cache
 __pycache__/
 *.pyc
@@ -18,3 +18,12 @@ Thumbs.db
 # Optional (if you have large data/models)
 data/
 models/
+
+venv/
+.env
+__pycache__/
+*.pyc
+*.pkl
+*.joblib
+*.h5
+.DS_Store
